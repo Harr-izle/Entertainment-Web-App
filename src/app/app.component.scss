@@ -1,21 +1,21 @@
 @use '../sass/breakpoints';
 
-// @include breakpoints.mq(tablet){
-//   .main{
-//     padding:1.5rem;
+@include breakpoints.mq(tablet){
+  .main{
+    padding:1.5rem;
    
-// }
-// }
+}
+}
 
 
-// @include breakpoints.mq(desktop){
-//   .main{
-//     padding:2rem;
+@include breakpoints.mq(desktop){
+  .main{
+    padding:2rem;
 
-// }
+}
 
-// }
+}
 
-// .container{
-//   padding: 2rem;
-// }
+.container{
+  padding: 2rem;
+}
