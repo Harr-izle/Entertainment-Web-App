@@ -1,0 +1,65 @@
+@use '../../../sass/variables' as v;
+@use '../../../sass/mixins' as m;
+@use '../../../sass/breakpoints';
+
+
+nav{
+    background-color: v.$primary-color;
+    height: 3.5rem;
+    @include m.flex-row($flex-direction: row, $align-items: center);
+    justify-content: space-between;
+    padding: 1rem 1rem;
+
+
+    .middle{
+        @include m.flex-row($flex-direction: row, $align-items: center, );
+        gap: 1.5rem;
+
+        svg{
+            fill: v.$secondary-color;
+
+            &:hover{
+                cursor: pointer;
+                fill: v.$error-color;
+            }
+
+            &.active{
+                fill: v.$text-color;
+            }
+
+        }
+    }
+    .avatar{
+        width: 1.5rem;
+        height: 1.5rem;
+
+        img{
+            width: 100%;
+            height: 100%;
+        }
+    }
+}
+
+//media queries
+@include breakpoints.mq(tablet){
+  nav{
+   border-radius: 0.625rem;
+  }
+}
+
+@include breakpoints.mq(desktop){
+  nav{
+    display: flex;
+    flex-direction: column;
+    width: 6rem;
+    height: calc(100vh - 4rem);
+    border-radius: 1.25rem;
+
+    .middle{
+        flex-direction: inherit;
+        justify-content: start;
+        flex: 1;
+        margin-top: 2rem;
+    }
+  }
+}
