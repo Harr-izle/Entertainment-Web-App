@@ -1,0 +1,123 @@
+@use "../../../sass/variables" as v;
+@use "../../../sass/mixins" as m;
+@use "../../../sass/breakpoints";
+
+
+.login{
+    @include m.flex-column($flex-direction: column, $align-items: center);
+    gap: 1.5rem;
+   
+
+
+    form{
+        background-color: v.$primary-color;
+        width: 20.438rem;
+        height: 22.813rem;
+        padding:1.5rem 1.5rem;
+        border-radius: 0.625rem;
+
+        h6{
+            color: v.$text-color;
+            font-size: v.$header-l
+        }
+
+        .email{
+            margin-top: 2.5rem;
+            input{
+                width: 17.438rem;
+                height: 2.313rem;
+                caret-color: v.$error-color;
+                background: none;
+                border: transparent;
+                border-bottom: 1px solid v.$secondary-color;
+                color: v.$text-color;
+                font-size: v.$body-m;
+                &:active,
+                &:focus-within {
+                 border-bottom: 1px solid v.$text-color;
+         
+                 ::placeholder{
+                     color: v.$text-color;
+                     font-size: v.$body-m;
+                    
+                 }
+                }
+            }
+        
+            
+        }
+
+        .password{
+            margin-top: 2.5rem;
+            input{
+                width: 17.438rem;
+                height: 2.313rem;
+                caret-color: v.$error-color;
+                background: none;
+                border: transparent;
+                border-bottom: 1px solid v.$secondary-color;
+                color: v.$text-color;
+                font-size: v.$body-m;
+                &:active,
+                &:focus-within {
+                 border-bottom: 1px solid v.$text-color;
+         
+                 ::placeholder{
+                     color: v.$text-color;
+                     font-size: v.$body-m;
+                    
+                 }
+                }
+            }
+        
+            
+        }
+
+        .button{
+            margin-top: 2.5rem;
+
+            .btn-log{
+                width: 17.438rem;
+                height: 3rem;
+                border-radius: 0.375rem;
+                background-color: v.$error-color;
+                border: none;
+                color: v.$text-color;
+                font-size: v.$body-m;
+
+                &:hover{
+                    cursor: pointer;
+                    background-color: v.$text-color;
+                    color: v.$primary-color;
+                }
+            }
+        }
+
+        .text{
+            margin-top: 1rem;
+            p{
+                font-size: v.$body-m;
+                color:v.$text-color;
+                text-align: center;
+            }
+
+            a{
+                color: v.$error-color;
+                font-size: v.$body-m;
+            }
+        }
+        
+        
+    }
+
+
+   
+}
+
+// media queries
+@include breakpoints.mq(tablet){
+    .login{
+
+    
+    }
+}
