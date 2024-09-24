@@ -1,0 +1,45 @@
+@use "../../../sass/variables" as v;
+@use "../../../sass/mixins" as m;
+@use "../../../sass/breakpoints";
+
+
+.search{
+    @include m.flex-row($flex-direction: row,$align-items: center, $flex-wrap: nowrap);
+    gap: 1rem;
+    margin-top:1.625rem ;
+    padding: 1rem;
+
+    input{
+       width: 100%;
+       background: none;
+       caret-color: v.$error-color;
+       outline: none;
+       border: none;
+       color: v.$text-color;
+       font-size: v.$header-m;
+       &:active,
+       &:focus-within {
+        border-bottom: 1px solid v.$secondary-color;
+
+        ::placeholder{
+            color: v.$text-color;
+            font-size: v.$body-m;
+        }
+       }
+    }
+}
+
+
+// media queries
+
+// @include breakpoints.mq(tablet){
+
+//     .search{
+//         display: flex;
+//         flex-direction: row;
+
+//         input{
+//             width: 100%;
+//         }
+//     }
+// }
