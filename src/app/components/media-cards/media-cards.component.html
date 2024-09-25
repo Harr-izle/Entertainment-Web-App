@@ -1,10 +1,38 @@
 <div class="trending">
-    <h6>Trending</h6>
-
-    <!-- images -->
-     <div class="media-card">
-        <picture>
-            <source/>
-        </picture>
-     </div>
+  <h6>Trending</h6>
+  <div class="trending-container">
+    @if (trendingItems$ | async; as trendingItems) {
+      @for (item of trendingItems; track item.title) {
+        <div class="media-card">
+          <picture>
+            <source
+              [srcset]="item.thumbnail.trending.large"
+              media="(min-width: 768px)"
+            />
+            <img
+              [src]="item.thumbnail.trending.small"
+              [alt]="item.title"
+              class="trending-image"
+            />
+          </picture>
+          <div class="media-info">
+            <div class="media-meta">
+              <p>{{ item.year }} • </p>  
+              <span class="category-badge" [innerHTML]="getCategorySvg(item.category)"></span>
+              <span>{{ item.category }}</span>
+              <p> • {{ item.rating }}</p>
+            </div>
+            <h3>{{ item.title }}</h3>
+          </div>
+          <div class="bookmark-icon">
+            <svg width="12" height="14" xmlns="http://www.w3.org/2000/svg"><path d="m10.518.75.399 12.214-5.084-4.24-4.535 4.426L.75 1.036l9.768-.285Z" stroke="#FFF" stroke-width="1.5" fill="none"/></svg>
+          </div>
+        </div>
+      } @empty {
+        <p>No trending items available.</p>
+      }
+    } @else {
+      <p>Loading trending items...</p>
+    }
+  </div>
 </div>

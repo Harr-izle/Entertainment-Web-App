@@ -5,12 +5,13 @@ import { SearchComponent } from "./components/search/search.component";
 import { LoginComponent } from "./components/login/login.component";
 import { Store } from '@ngrx/store';
 import { loadMediaItems } from './state/media.actions';
+import { MediaCardsComponent } from "./components/media-cards/media-cards.component";
 
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, NavComponent, SearchComponent, LoginComponent],
+  imports: [RouterOutlet, NavComponent, SearchComponent, LoginComponent, MediaCardsComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
