@@ -1,22 +1,16 @@
 import { createAction, props } from '@ngrx/store';
-import { IMedia } from '../interfaces/media';
+import { Media } from '../interfaces/media';
 
-export const loadMedia = createAction('[Media] Load Media');
-export const loadMediaSuccess = createAction(
-  '[Media] Load Media Success',
-  props<{ media: IMedia[] }>()
+export const loadMediaItems = createAction('[Media] Load Media Items');
+export const loadMediaItemsSuccess = createAction(
+  '[Media] Load Media Items Success',
+  props<{ media: Media[] }>()
 );
 export const loadMediaFailure = createAction(
   '[Media] Load Media Failure',
-  props<{ error: any }>()
+  props<{ error: string }>()
 );
-export const toggleBookmark = createAction(
-  '[Media] Toggle Bookmark',
-  props<{ title: string }>()
+export const setSearchItem = createAction(
+  '[Media] Set Search Item',
+  props<{ searchItem: string }>()
 );
-export const searchMedia = createAction(
-  '[Media] Search Media',
-  props<{ query: string }>()
-);
-
-

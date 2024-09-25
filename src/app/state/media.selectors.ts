@@ -1,37 +1,31 @@
-import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { MediaState } from './media.reducers';
+import { createSelector } from '@ngrx/store';
+import { Media, MediaState } from '../interfaces/media';
+import { AppState } from '../state/app.state';
 
-export const selectMediaState = createFeatureSelector<MediaState>('media');
+export const selectMediaState = (state: AppState) => state.media;
 
-export const selectAllMedia = createSelector(
+export const selectAllMediaItems = createSelector(
   selectMediaState,
-  (state: MediaState) => state.items
+  (mediaState: MediaState) => mediaState.mediaItems
 );
 
-export const selectFilteredMedia = createSelector(
+export const selectSearchItem = createSelector(
   selectMediaState,
-  (state: MediaState) => state.filteredItems
+  (state: MediaState) => state.searchItem
 );
 
-export const selectLoading = createSelector(
-  selectMediaState,
-  (state: MediaState) => state.loading
-);
-
-export const selectError = createSelector(
-  selectMediaState,
-  (state: MediaState) => state.error
-);
-
-export const selectBookmarkedMedia = createSelector(selectAllMedia, (media) =>
-  media.filter((item) => item.isBookmarked)
-);
-
-export const selectTrendingMedia = createSelector(selectAllMedia, (media) =>
-  media.filter((item) => item.isTrending)
-);
-
-export const selectMediaByCategory = (category: string) =>
-  createSelector(selectAllMedia, (media) =>
-    media.filter((item) => item.category === category)
+export const selectFilteredMediaItems = (category: string | null) =>
+  createSelector(
+    selectAllMediaItems,
+    selectSearchItem,
+    (mediaItems: Media[], searchItem: string = '') => {
+      return mediaItems.filter((item) => {
+        const matchesSearch = item.title
+          .toLowerCase()
+          .includes(searchItem.toLowerCase());
+        const matchesCategory =
+          !category || item.category.toLowerCase() === category.toLowerCase();
+        return matchesSearch && matchesCategory;
+      });
+    }
   );

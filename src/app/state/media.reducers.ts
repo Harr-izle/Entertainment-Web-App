@@ -1,52 +1,20 @@
 import { createReducer, on } from '@ngrx/store';
-import * as MediaActions from './media.actions';
-import { IMedia } from '../interfaces/media';
+import { loadMediaItemsSuccess, setSearchItem } from './media.actions';
+import { MediaState } from '../interfaces/media';
 
-export interface MediaState {
-  items: IMedia[];
-  filteredItems: IMedia[];
-  loading: boolean;
-  error: any;
-}
-
-export const initialState: MediaState = {
-  items: [],
-  filteredItems: [],
-  loading: false,
-  error: null,
+const initialState: MediaState = {
+  mediaItems: [],
+  searchItem: '',
 };
 
 export const mediaReducer = createReducer(
   initialState,
-  on(MediaActions.loadMedia, (state) => ({ ...state, loading: true })),
-  on(MediaActions.loadMediaSuccess, (state, { media }) => ({
+  on(loadMediaItemsSuccess, (state, { media }) => ({
     ...state,
-    items: media,
-    filteredItems: media,
-    loading: false,
+    mediaItems: media,
   })),
-  on(MediaActions.loadMediaFailure, (state, { error }) => ({
+  on(setSearchItem, (state, { searchItem }) => ({
     ...state,
-    error,
-    loading: false,
-  })),
-  on(MediaActions.toggleBookmark, (state, { title }) => ({
-    ...state,
-    items: state.items.map((item) =>
-      item.title === title
-        ? { ...item, isBookmarked: !item.isBookmarked }
-        : item
-    ),
-    filteredItems: state.filteredItems.map((item) =>
-      item.title === title
-        ? { ...item, isBookmarked: !item.isBookmarked }
-        : item
-    ),
-  })),
-  on(MediaActions.searchMedia, (state, { query }) => ({
-    ...state,
-    filteredItems: state.items.filter((item) =>
-      item.title.toLowerCase().includes(query.toLowerCase())
-    ),
+    searchItem,
   }))
 );

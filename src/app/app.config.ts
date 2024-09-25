@@ -16,7 +16,7 @@ export const appConfig: ApplicationConfig = {
     provideHttpClient(withFetch()),
     provideClientHydration(),
     provideStore({media: mediaReducer}),
-    provideEffects(MediaEffects),
+    provideEffects([MediaEffects]),
     provideStoreDevtools({ maxAge: 25, logOnly: !isDevMode() }),
   ],
 };

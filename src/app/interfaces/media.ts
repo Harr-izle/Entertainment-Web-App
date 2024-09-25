@@ -1,26 +1,24 @@
-export interface Itrending{
-    small: string;
-    large: string;
-}
-
-export interface Iregular{
-    small: string;
-    medium: string;
-    large: string;
-}
-
-export interface IThumbnail {
-    trending: Itrending;
-    regular: Iregular;
-}
-
-export interface IMedia{
+export interface Media {
     title: string;
-    thumbnail: IThumbnail;
+    thumbnail: {
+      trending: {
+        small: string;
+        large: string;
+      };
+      regular: {
+        small: string;
+        medium: string;
+        large: string;
+      };
+    };
     year: number;
     category: string;
     rating: string;
     isBookmarked: boolean;
     isTrending: boolean;
-}
-
+  }
+  
+  export interface MediaState {
+    mediaItems: Media[];
+    searchItem: string;
+  }

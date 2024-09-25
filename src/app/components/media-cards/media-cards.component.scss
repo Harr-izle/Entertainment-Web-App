@@ -1,0 +1,15 @@
+@use "../../../sass/variables" as v;
+@use "../../../sass/mixins" as m;
+@use "../../../sass/breakpoints";
+
+
+.trending{
+    @include m.flex-row($flex-direction: row, $align-items: center);
+
+    h6{
+        font-size: v.$header-l;
+        color: v.$text-color;
+    }
+
+
+}
