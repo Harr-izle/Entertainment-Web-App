@@ -1,0 +1,30 @@
+<div class="media-list">
+  <p>Recommended for you</p>
+  <div class="media-grid">
+    @for (item of mediaItems$ | async; track item.title) {
+    <div class="media-item">
+      <picture>
+        <source
+          [srcset]="item.thumbnail.regular.large"
+          media="(min-width: 1024px)"
+        />
+        <source
+          [srcset]="item.thumbnail.regular.medium"
+          media="(min-width: 768px)"
+        />
+        <img [src]="item.thumbnail.regular.small" [alt]="item.title" />
+      </picture>
+      <div class="media-info">
+        <p>
+          {{ item.year }} •
+          <span [innerHTML]="getCategorySvg(item.category)"></span>
+          {{ item.category }} •
+          {{ item.rating }}
+        </p>
+        
+        <h3>{{ item.title }}</h3>
+      </div>
+    </div>
+    }
+  </div>
+</div>

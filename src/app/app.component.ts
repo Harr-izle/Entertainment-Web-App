@@ -6,12 +6,13 @@ import { LoginComponent } from "./components/login/login.component";
 import { Store } from '@ngrx/store';
 import { loadMediaItems } from './state/media.actions';
 import { MediaCardsComponent } from "./components/media-cards/media-cards.component";
+import { MediaListComponent } from "./components/media-list/media-list.component";
 
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, NavComponent, SearchComponent, LoginComponent, MediaCardsComponent],
+  imports: [RouterOutlet, NavComponent, SearchComponent, LoginComponent, MediaCardsComponent, MediaListComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
