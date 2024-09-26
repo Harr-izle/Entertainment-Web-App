@@ -33,6 +33,21 @@
         height: 100%;
         object-fit: contain;
         border-radius: 0.5rem;
+        transition: all 0.3s ease-in-out;
+        opacity: 1;
+      }
+      &:hover img {
+        opacity: 0.5;
+        transform: scale(1.05);
+      }
+      .play {
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease-in-out;
+      }
+      &:hover .play {
+        opacity: 1;
+        visibility: visible;
       }
 
       .media-info {
@@ -50,69 +65,129 @@
       }
 
       .bookmark-icon {
-        width: 2rem; 
-        height: 2rem; 
+        width: 2rem;
+        height: 2rem;
         background-color: #10141e80;
         position: absolute;
         top: 0.5rem;
         right: 0.5rem;
-        border-radius: 50%; 
+        border-radius: 50%;
         display: flex;
         justify-content: center;
-        align-items: center; 
+        align-items: center;
       }
-      
+      .play {
+        width: 6rem;
+        height: 2.5rem;
+        background-color: rgba(255, 255, 255, 0.2);
+        border-radius: 1.781rem;
+        position: absolute;
+        top: 3rem;
+        right: 1.9rem;
+
+        .cont {
+          display: flex;
+          align-items: center;
+          gap: 0.5rem;
+          padding: 0.3rem 0.3rem;
+
+          span {
+            font-size: 1rem;
+            color: v.$text-color;
+          }
+        }
+      }
     }
   }
 }
 
 // media queries
 @include breakpoints.mq(tablet) {
-  .trending{
-    width:156.875rem;
+  .trending {
+    width: 156.875rem;
     height: 18.438rem;
     overflow-x: scroll;
     overflow-y: hidden;
     stroke-width: hidden;
 
-    .trending-container{
+    .trending-container {
       gap: 2.5rem;
 
-
-      .media-card{
+      .media-card {
         width: 29.375rem;
         height: 14.375rem;
       }
 
-      .bookmark-icon{
+      .bookmark-icon {
         right: 2rem;
+      }
+
+      .play {
+        width: 7.313rem;
+        height: 3rem;
+        background-color: rgba(255, 255, 255, 0.2);
+        border-radius: 1.781rem;
+        position: absolute;
+        top: 3.5rem;
+        right: 3rem;
+
+        .cont {
+          display: flex;
+          align-items: center;
+          gap: 1rem;
+          padding: 0.563rem 0.563rem;
+
+          span {
+            font-size: 1.25rem;
+            color: v.$text-color;
+          }
+        }
       }
     }
   }
-
-
 }
 
 @include breakpoints.mq(desktop) {
-  .trending{
+  .trending {
     width: 156.875rem;
     overflow-x: scroll;
     overflow-y: hidden;
     stroke-width: hidden;
     margin-bottom: 0.5rem;
 
-    .trending-container{
+    .trending-container {
       gap: 2.5rem;
 
-
-      .media-card{
+      .media-card {
         width: 29.375rem;
         height: 14.375rem;
       }
 
-    .bookmark-icon{
+      .bookmark-icon {
         right: 2rem;
-    }
+      }
+
+      .play {
+        width: 7.313rem;
+        height: 3rem;
+        background-color: rgba(255, 255, 255, 0.2);
+        border-radius: 1.781rem;
+        position: absolute;
+        top: 5rem;
+        right: 5rem;
+
+        .cont {
+          display: flex;
+          align-items: center;
+          gap: 1rem;
+          padding: 0.563rem 0.563rem;
+
+          span {
+            font-size: 1.25rem;
+            color: v.$text-color;
+          }
+        }
+      }
     }
   }
 }
