@@ -1,21 +1,21 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { Media } from '../../interfaces/media';
 import { AppState } from '../../state/app.state';
 import { loadMediaItems, toggleBookmark } from '../../state/media.actions';
-import { selectFilteredMediaItems, selectTrendingItems } from '../../state/media.selectors';
+import { selectTrendingItems } from '../../state/media.selectors';
 import { CommonModule } from '@angular/common';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+
 @Component({
   selector: 'app-media-cards',
   standalone: true,
   imports: [CommonModule],
   templateUrl: './media-cards.component.html',
-  styleUrl: './media-cards.component.scss'
+  styleUrls: ['./media-cards.component.scss']
 })
-export class MediaCardsComponent {
- 
+export class MediaCardsComponent implements OnInit {
   trendingItems$: Observable<Media[]>;
 
   constructor(

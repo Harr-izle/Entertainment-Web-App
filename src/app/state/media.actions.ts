@@ -18,3 +18,8 @@ export const toggleBookmark = createAction(
   '[Media] Toggle Bookmark',
   props<{ title: string }>()
 );
+export const setIsBookmarked = createAction(
+  '[Media] Set Is Bookmarked',
+  props<{ isBookmarked: boolean }>()
+);
+

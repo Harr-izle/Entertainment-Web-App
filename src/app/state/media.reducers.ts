@@ -1,10 +1,11 @@
 import { createReducer, on } from '@ngrx/store';
-import { loadMediaItemsSuccess, setSearchItem, toggleBookmark } from './media.actions';
+import { loadMediaItemsSuccess, setSearchItem, toggleBookmark, setIsBookmarked } from './media.actions';
 import { MediaState } from '../interfaces/media';
 
 const initialState: MediaState = {
   mediaItems: [],
   searchItem: '',
+  isBookmarked: false,
 };
 
 export const mediaReducer = createReducer(
@@ -22,5 +23,9 @@ export const mediaReducer = createReducer(
     mediaItems: state.mediaItems.map(item =>
       item.title === title ? { ...item, isBookmarked: !item.isBookmarked } : item
     ),
+  })),
+  on(setIsBookmarked, (state, { isBookmarked }) => ({
+    ...state,
+    isBookmarked,
   }))
 );

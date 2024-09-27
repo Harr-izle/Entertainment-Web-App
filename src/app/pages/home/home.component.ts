@@ -8,6 +8,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable, map } from 'rxjs';
 import { AppState } from '../../state/app.state';
+import { setIsBookmarked } from '../../state/media.actions';
 
 @Component({
   selector: 'app-home',
@@ -18,7 +19,6 @@ import { AppState } from '../../state/app.state';
 })
 export class HomeComponent {
   category$!: Observable<string | null>;
-  isBoomarked: boolean = false;
 
   constructor(private route: ActivatedRoute, private store: Store<AppState>) {}
 
@@ -28,5 +28,10 @@ export class HomeComponent {
     );
   }
 
-
+  toggleBookmarkFilter(isBookmarked: boolean) {
+    this.store.dispatch(setIsBookmarked({ isBookmarked }));
+  }
 }
+
+
+

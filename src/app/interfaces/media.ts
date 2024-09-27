@@ -21,4 +21,6 @@ export interface Media {
   export interface MediaState {
     mediaItems: Media[];
     searchItem: string;
+    isBookmarked: boolean;
+
   }

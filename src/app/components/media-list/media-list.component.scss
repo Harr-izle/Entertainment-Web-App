@@ -7,6 +7,7 @@
   flex-direction: column;
   gap: 1rem;
   margin-top: 1rem;
+  overflow-x: hidden;
   p {
     font-size: 1.25rem;
     color: v.$text-color;
@@ -116,6 +117,7 @@
 
 @include breakpoints.mq(tablet) {
   .media-list {
+    overflow-x: hidden;
     .media-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -161,6 +163,9 @@
 
 @include breakpoints.mq(desktop) {
   .media-list {
+    overflow: hidden;
+    background-color: red;
+ 
     .media-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);

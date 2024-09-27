@@ -7,6 +7,7 @@
     grid-template-rows: 100px 1fr;
     grid-column-gap: 0px;
     grid-row-gap: 0px;
+    // gap: 2rem;
     }
     
     .div1 { grid-area: 1 / 1 / 2 / 2; }
@@ -36,8 +37,26 @@
         grid-template-rows: 1fr;
         grid-column-gap: 0px;
         grid-row-gap: 0px;
+        gap: 0.5rem;
+        height: 100vh;
+        overflow: hidden;
+        padding: 0rem 1rem;
+      
         }
         
-        .div1 { grid-area: 1 / 1 / 2 / 2; }
-        .div2 { grid-area: 1 / 2 / 2 / 3; }
+        .div1 { 
+            grid-area: 1 / 1 / 2 / 2;
+          
+           
+
+        }
+        .div2 { 
+            grid-area: 1 / 2 / 2 / 3; 
+            height: 100vh;
+            overflow-y: scroll;
+            // overflow-x: hidden;
+            scrollbar-width: none;
+           
+
+        }
 }

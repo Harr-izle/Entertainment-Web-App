@@ -40,15 +40,17 @@
       &:hover img {
         opacity: 0.5;
         transform: scale(1.05);
+        cursor: pointer;
       }
-      .play {
+      .play-icon {
         opacity: 0;
         visibility: hidden;
         transition: all 0.3s ease-in-out;
       }
-      &:hover .play {
+      &:hover .play-icon {
         opacity: 1;
         visibility: visible;
+        cursor: pointer;
       }
 
       .media-info {
@@ -63,11 +65,11 @@
           flex-direction: row;
           gap: 0.5rem;
 
-          p,span{
+          p,
+          span {
             color: v.$text-color;
             font-size: v.$body-m;
             font-weight: lighter;
-
           }
         }
       }
@@ -83,6 +85,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
+        cursor: pointer;
       }
       .play {
         width: 6rem;
@@ -157,6 +160,7 @@
 
 @include breakpoints.mq(desktop) {
   .trending {
+    background-color: yellow;
     width: 156.875rem;
     overflow-x: scroll;
     overflow-y: hidden;
@@ -165,6 +169,7 @@
 
     .trending-container {
       gap: 2.5rem;
+     
 
       .media-card {
         width: 29.375rem;
@@ -175,16 +180,17 @@
         right: 2rem;
       }
 
-      .play {
+      .play-icon {
         width: 7.313rem;
         height: 3rem;
         background-color: rgba(255, 255, 255, 0.2);
         border-radius: 1.781rem;
         position: absolute;
         top: 5rem;
-        right: 5rem;
+        right: 10rem;
+       
 
-        .cont {
+        .content {
           display: flex;
           align-items: center;
           gap: 1rem;
