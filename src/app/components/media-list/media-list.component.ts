@@ -1,12 +1,13 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, Input, SimpleChanges } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable, map, switchMap } from 'rxjs';
 import { Media } from '../../interfaces/media';
 import { AppState } from '../../state/app.state';
-import { selectFilteredMediaItems } from '../../state/media.selectors';
+import { selectBookmarkedItems, selectFilteredMediaItems, selectRecommendedItems } from '../../state/media.selectors';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { toggleBookmark } from '../../state/media.actions';
 
 @Component({
   selector: 'app-media-list',
@@ -16,20 +17,45 @@ import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
   styleUrl: './media-list.component.scss'
 })
 export class MediaListComponent {
-
+  @Input() category: string | null = null;
   mediaItems$!: Observable<Media[]>;
 
   constructor(
     private store: Store<AppState>,
-    private route: ActivatedRoute,
     private sanitizer: DomSanitizer
   ) {}
 
   ngOnInit() {
-    this.mediaItems$ = this.route.paramMap.pipe(
-      map(params => params.get('category')),
-      switchMap(category => this.store.select(selectFilteredMediaItems(category)))
-    );
+    this.updateMediaItems();
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['category']) {
+      this.updateMediaItems();
+    }
+  }
+
+  updateMediaItems() {
+    if (this.category === null) {
+      this.mediaItems$ = this.store.select(selectRecommendedItems);
+    } else if (this.category === 'bookmarks') {
+      this.mediaItems$ = this.store.select(selectBookmarkedItems);
+    } else {
+      this.mediaItems$ = this.store.select(selectFilteredMediaItems(this.category));
+    }
+  }
+
+  getTitle(): string {
+    switch (this.category) {
+      case 'movie':
+        return 'Movies';
+      case 'tv':
+        return 'TV Series';
+      case 'bookmarks':
+        return 'Bookmarked Shows';
+      default:
+        return 'Recommended for you';
+    }
   }
   
   getMovieSvg(): SafeHtml {
@@ -44,6 +70,11 @@ export class MediaListComponent {
 
   getCategorySvg(category: string): SafeHtml {
     return category.toLowerCase() === 'movie' ? this.getMovieSvg() : this.getTvSeriesSvg();
+  }
+
+  
+  toggleBookmark(item: Media) {
+    this.store.dispatch(toggleBookmark({ title: item.title }));
   }
 
 }

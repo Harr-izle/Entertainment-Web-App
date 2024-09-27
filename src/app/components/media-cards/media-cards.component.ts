@@ -3,8 +3,8 @@ import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { Media } from '../../interfaces/media';
 import { AppState } from '../../state/app.state';
-import { loadMediaItems } from '../../state/media.actions';
-import { selectFilteredMediaItems } from '../../state/media.selectors';
+import { loadMediaItems, toggleBookmark } from '../../state/media.actions';
+import { selectFilteredMediaItems, selectTrendingItems } from '../../state/media.selectors';
 import { CommonModule } from '@angular/common';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 @Component({
@@ -22,10 +22,7 @@ export class MediaCardsComponent {
     private store: Store<AppState>,
     private sanitizer: DomSanitizer
   ) {
-    this.trendingItems$ = this.store.pipe(
-      select(selectFilteredMediaItems(null)),
-      select(items => items.filter(item => item.isTrending))
-    );
+    this.trendingItems$ = this.store.pipe(select(selectTrendingItems));
   }
 
   ngOnInit() {
@@ -38,5 +35,9 @@ export class MediaCardsComponent {
 
     const svg = category.toLowerCase() === 'movie' ? movieSvg : tvSeriesSvg;
     return this.sanitizer.bypassSecurityTrustHtml(svg);
+  }
+
+  toggleBookmark(item: Media) {
+    this.store.dispatch(toggleBookmark({ title: item.title }));
   }
 }

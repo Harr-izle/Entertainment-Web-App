@@ -1,0 +1,21 @@
+<div class="parent">
+  <div class="div1">
+    <app-nav/>
+  </div>
+  <div class="div2">
+    <app-search/>
+    <ng-container *ngIf="(category$ | async) === null">
+      <app-media-cards/>
+      <app-media-list [category]="null"/>
+    </ng-container>
+    <ng-container *ngIf="(category$ | async) === 'movie'">
+      <app-media-list [category]="'movie'"/>
+    </ng-container>
+    <ng-container *ngIf="(category$ | async) === 'tv'">
+      <app-media-list [category]="'tv'"/>
+    </ng-container>
+    <ng-container *ngIf="(category$ | async) === 'bookmarks'">
+      <app-media-list [category]="'bookmarks'"/>
+    </ng-container>
+  </div>
+</div>

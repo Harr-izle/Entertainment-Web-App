@@ -14,6 +14,21 @@ export const selectSearchItem = createSelector(
   (state: MediaState) => state.searchItem
 );
 
+export const selectTrendingItems = createSelector(
+  selectAllMediaItems,
+  (mediaItems: Media[]) => mediaItems.filter(item => item.isTrending)
+);
+
+export const selectRecommendedItems = createSelector(
+  selectAllMediaItems,
+  selectSearchItem,
+  (mediaItems: Media[], searchItem: string = '') => 
+    mediaItems.filter(item => 
+      !item.isTrending && 
+      item.title.toLowerCase().includes(searchItem.toLowerCase())
+    )
+);
+
 export const selectFilteredMediaItems = (category: string | null) =>
   createSelector(
     selectAllMediaItems,
@@ -23,9 +38,27 @@ export const selectFilteredMediaItems = (category: string | null) =>
         const matchesSearch = item.title
           .toLowerCase()
           .includes(searchItem.toLowerCase());
-        const matchesCategory =
-          !category || item.category.toLowerCase() === category.toLowerCase();
+        let matchesCategory = true;
+        
+        if (category === 'movie') {
+          matchesCategory = item.category.toLowerCase() === 'movie';
+        } else if (category === 'tv') {
+          matchesCategory = item.category.toLowerCase() === 'tv series';
+        } else if (category === 'bookmarks') {
+          matchesCategory = item.isBookmarked;
+        }
+        
         return matchesSearch && matchesCategory;
       });
     }
   );
+
+export const selectBookmarkedItems = createSelector(
+  selectAllMediaItems,
+  selectSearchItem,
+  (mediaItems: Media[], searchItem: string = '') =>
+    mediaItems.filter(item => 
+      item.isBookmarked && 
+      item.title.toLowerCase().includes(searchItem.toLowerCase())
+    )
+);

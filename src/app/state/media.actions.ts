@@ -14,3 +14,7 @@ export const setSearchItem = createAction(
   '[Media] Set Search Item',
   props<{ searchItem: string }>()
 );
+export const toggleBookmark = createAction(
+  '[Media] Toggle Bookmark',
+  props<{ title: string }>()
+);

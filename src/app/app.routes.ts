@@ -1,15 +1,21 @@
 import { Routes } from '@angular/router';
+import { HomeComponent } from './pages/home/home.component';
 
 export const routes: Routes = [
-
-// {
-//     path: '',
-//     loadComponent: () => import('./components/nav/nav.component').then(m => m.NavComponent),
-// },
-
-// {
-//     path: '',
-//     loadComponent: () => import('./components/media-list/media-list.component').then(m => m.MediaListComponent),
-// }
-
+  {
+    path: '',
+    component: HomeComponent
+  },
+  {
+    path: 'movie',
+    component: HomeComponent
+  },
+  {
+    path: 'tv',
+    component: HomeComponent
+  },
+  {
+    path: 'bookmarks',
+    component: HomeComponent
+  }
 ];
