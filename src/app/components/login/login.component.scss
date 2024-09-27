@@ -6,6 +6,7 @@
 .login{
     @include m.flex-column($flex-direction: column, $align-items: center);
     gap: 1.5rem;
+    margin-top: 5rem;
    
 
 
@@ -35,13 +36,25 @@
                 &:active,
                 &:focus-within {
                  border-bottom: 1px solid v.$text-color;
+
+                 &.ng-touched.ng-invalid {
+                    border-bottom: 1px solid v.$error-color;
+                }
          
                  ::placeholder{
                      color: v.$text-color;
                      font-size: v.$body-m;
                     
                  }
+                 
                 }
+            }
+
+            .err-message{
+                color: v.$error-color;
+                font-size: v.$body-m;
+                position: absolute;
+                right: 5rem;
             }
         
             
@@ -67,7 +80,16 @@
                      font-size: v.$body-m;
                     
                  }
+                 &.ng-touched.ng-invalid {
+                    border-bottom: 1px solid v.$error-color;
                 }
+                }
+            }
+            .err-message{
+                color: v.$error-color;
+                font-size: v.$body-m;
+                position: absolute;
+                right: 5rem;
             }
         
             
@@ -89,6 +111,10 @@
                     cursor: pointer;
                     background-color: v.$text-color;
                     color: v.$primary-color;
+                }
+                &:disabled {
+                    opacity: 0.5;
+                    cursor: not-allowed;
                 }
             }
         }
@@ -117,7 +143,73 @@
 // media queries
 @include breakpoints.mq(tablet){
     .login{
+            form{
+                .email{
+                    input{
+                        &:active,
+                        &:focus-within {
+                         border-bottom: 1px solid v.$text-color;
+                        }
+                        &.ng-touched.ng-invalid {
+                            border-bottom: 1px solid v.$error-color;
+                        }
+                    }
+                    .err-message{
+                        color: v.$error-color;
+                        font-size: v.$body-m;
+                        position: absolute;
+                        right: 15rem;
+                    }
+                
+                }
 
+                .password{
+                    .err-message{
+                        color: v.$error-color;
+                        font-size: v.$body-m;
+                        position: absolute;
+                        right: 15rem;
+
+                        &.ng-touched.ng-invalid {
+                            border-bottom: 1px solid v.$error-color;
+                        }
+                    }
+                
+                }
+            }
     
     }
+}
+
+@include breakpoints.mq(desktop){
+    .login{
+        form{
+            .email{
+                input{
+                    &:active,
+                    &:focus-within {
+                     border-bottom: 1px solid v.$text-color;
+                    }
+                }
+                .err-message{
+                    color: v.$error-color;
+                    font-size: v.$body-m;
+                    position: absolute;
+                    right: 35rem;
+                }
+            
+            }
+
+            .password{
+                .err-message{
+                    color: v.$error-color;
+                    font-size: v.$body-m;
+                    position: absolute;
+                    right: 35rem;
+                }
+            
+            }
+        }
+
+}
 }

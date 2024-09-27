@@ -1,1 +1,41 @@
-<p>signup works!</p>
+<div class="signup">
+    <!-- logo -->
+    <svg width="33" height="27" xmlns="http://www.w3.org/2000/svg">
+      <path
+        d="m26.463.408 3.2 6.4h-4.8l-3.2-6.4h-3.2l3.2 6.4h-4.8l-3.2-6.4h-3.2l3.2 6.4h-4.8l-3.2-6.4h-1.6a3.186 3.186 0 0 0-3.184 3.2l-.016 19.2a3.2 3.2 0 0 0 3.2 3.2h25.6a3.2 3.2 0 0 0 3.2-3.2V.408h-6.4Z"
+        fill="#FC4747"
+      />
+    </svg>
+
+    <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+      <h6>Sign Up</h6>
+      <div class="email">
+        <input type="email" placeholder="Email address" formControlName="email"/>
+        <span class="err-message" *ngIf="email?.touched && email?.invalid">
+          {{ email?.errors?.['required'] ? "Can't be empty" : "Invalid email format" }}
+        </span>
+      </div>
+      <!-- password -->
+      <div class="password">
+        <input type="password" placeholder="Password" formControlName="password"/>
+        <span class="err-message" *ngIf="password?.touched && password?.invalid">
+          {{ password?.errors?.['required'] ? "Can't be empty" : "Password must be at least 6 characters" }}
+        </span>
+      </div>
+      <!-- repeatpassword -->
+      <div class="password">
+        <input type="password" placeholder="Repeat password" formControlName="repeatPassword"/>
+        <span class="err-message" *ngIf="repeatPassword?.touched && (repeatPassword?.invalid || signupForm.errors?.['passwordMismatch'])">
+          {{ repeatPassword?.errors?.['required'] ? "Can't be empty" : "Passwords do not match" }}
+        </span>
+      </div>
+      <!-- button -->
+      <div class="button">
+        <button class="btn-log" type="submit" [disabled]="signupForm.invalid">Create an account</button>
+      </div>
+      <!-- account -->
+      <div class="text">
+        <p>Already have an account? <a href="">Login</a></p>
+      </div>
+    </form>
+  </div>

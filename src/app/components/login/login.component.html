@@ -1,4 +1,3 @@
-
 <div class="login">
   <!-- logo -->
   <svg width="33" height="27" xmlns="http://www.w3.org/2000/svg">
@@ -8,23 +7,26 @@
     />
   </svg>
 
-  <form action="">
+  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
     <h6>Login</h6>
     <div class="email">
-      <input type="email" placeholder="Email address"/>
+      <input type="email" placeholder="Email address" formControlName="email"/>
+      <span class="err-message" *ngIf="email?.touched && email?.invalid">
+        {{ email?.errors?.['required'] ? "Can't be empty" : "Invalid email format" }}
+      </span>
     </div>
     <!-- password -->
     <div class="password">
-        <input type="password" placeholder="Password"/>
-      </div>
-      <!-- button -->
+      <input type="password" placeholder="Password" formControlName="password"/>
+      <span class="err-message" *ngIf="password?.touched && password?.invalid">Can't be empty</span>
+    </div>
+    <!-- button -->
     <div class="button">
-        <button class="btn-log"  type="submit">Login to your account</button>
+      <button class="btn-log" type="submit" [disabled]="loginForm.invalid">Login to your account</button>
     </div>
     <!-- account -->
-     <div class="text">
-        <p>Don't have an account? <a href="">Sign up</a></p>
-     </div>
-
+    <div class="text">
+      <p>Don't have an account? <a href="">Sign up</a></p>
+    </div>
   </form>
 </div>
