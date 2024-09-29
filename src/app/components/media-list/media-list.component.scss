@@ -164,8 +164,7 @@
 @include breakpoints.mq(desktop) {
   .media-list {
     overflow: hidden;
-    background-color: red;
- 
+   
     .media-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
