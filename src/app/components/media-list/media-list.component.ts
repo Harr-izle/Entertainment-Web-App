@@ -6,7 +6,7 @@ import { Media } from '../../interfaces/media';
 import { AppState } from '../../state/app.state';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { toggleBookmark } from '../../state/media.actions';
-import { selectFilteredMediaItems } from '../../state/media.selectors';
+import { selectBookmarkedItems, selectFilteredMediaItems } from '../../state/media.selectors';
 
 @Component({
   selector: 'app-media-list',
@@ -17,6 +17,7 @@ import { selectFilteredMediaItems } from '../../state/media.selectors';
 })
 export class MediaListComponent implements OnInit {
   @Input() category: string | null = null;
+  @Input() isBookmarkView: boolean = false;
   mediaItems$!: Observable<Media[]>;
 
   constructor(
@@ -25,10 +26,17 @@ export class MediaListComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.mediaItems$ = this.store.select(selectFilteredMediaItems, { category: this.category });
+    if (this.isBookmarkView) {
+      this.mediaItems$ = this.store.select(selectBookmarkedItems);
+    } else {
+      this.mediaItems$ = this.store.select(selectFilteredMediaItems, { category: this.category });
+    }
   }
 
   getTitle(): string {
+    if (this.isBookmarkView) {
+      return 'Bookmarked Shows';
+    }
     switch (this.category) {
       case 'movie':
         return 'Movies';
@@ -38,7 +46,7 @@ export class MediaListComponent implements OnInit {
         return 'Recommended for you';
     }
   }
-  
+
   getCategorySvg(category: string): SafeHtml {
     return category.toLowerCase() === 'movie' ? this.getMovieSvg() : this.getTvSeriesSvg();
   }

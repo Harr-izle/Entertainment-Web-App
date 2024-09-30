@@ -15,19 +15,22 @@ nav{
         @include m.flex-row($flex-direction: row, $align-items: center, );
         gap: 1.5rem;
 
-        svg{
-            fill: v.$secondary-color;
-
-            &:hover{
+        a {
+            svg {
+              fill: v.$secondary-color;
+        
+              &:hover {
                 cursor: pointer;
                 fill: v.$error-color;
+              }
             }
-
-            &.active{
+        
+            &.active {
+              svg {
                 fill: v.$text-color;
+              }
             }
-
-        }
+          }
     }
     .avatar{
         width: 1.5rem;

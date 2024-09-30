@@ -19,17 +19,17 @@ import { setIsBookmarked } from '../../state/media.actions';
 })
 export class HomeComponent {
   category$!: Observable<string | null>;
+  isBookmarkView$!: Observable<boolean>;
 
   constructor(private route: ActivatedRoute, private store: Store<AppState>) {}
 
   ngOnInit() {
     this.category$ = this.route.queryParamMap.pipe(
-      map(params => params.get('category'))
+      map(params => params.get('category') || null)
     );
-  }
-
-  toggleBookmarkFilter(isBookmarked: boolean) {
-    this.store.dispatch(setIsBookmarked({ isBookmarked }));
+    this.isBookmarkView$ = this.route.url.pipe(
+      map(segments => segments[0]?.path === 'bookmarks')
+    );
   }
 }
 

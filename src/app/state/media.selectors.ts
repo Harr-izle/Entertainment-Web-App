@@ -14,39 +14,40 @@ export const selectSearchItem = createSelector(
   (state: MediaState) => state.searchItem
 );
 
-export const selectIsBookmarked = createSelector(
-  selectMediaState,
-  (state: MediaState) => state.isBookmarked
+export const selectBookmarkedItems = createSelector(
+  selectAllMediaItems,
+  selectSearchItem,
+  (mediaItems: Media[], searchItem: string = '') => 
+    mediaItems.filter(item => 
+      item.isBookmarked && 
+      item.title.toLowerCase().includes(searchItem.toLowerCase())
+    )
 );
 
 export const selectTrendingItems = createSelector(
   selectAllMediaItems,
-  selectIsBookmarked,
   selectSearchItem,
-  (mediaItems: Media[], isBookmarked: boolean, searchItem: string = '') => 
+  (mediaItems: Media[], searchItem: string = '') => 
     mediaItems.filter(item => 
       item.isTrending && 
-      (!isBookmarked || item.isBookmarked) &&
       item.title.toLowerCase().includes(searchItem.toLowerCase())
     )
 );
 
 export const selectFilteredMediaItems = createSelector(
   selectAllMediaItems,
-  selectIsBookmarked,
   selectSearchItem,
-  (mediaItems: Media[], isBookmarked: boolean, searchItem: string = '', category: string | null = null) => 
+  (mediaItems: Media[], searchItem: string = '', props: { category: string | null }) => 
     mediaItems.filter(item => {
       const matchesSearch = item.title.toLowerCase().includes(searchItem.toLowerCase());
-      const matchesBookmark = !isBookmarked || item.isBookmarked;
       let matchesCategory = true;
       
-      if (category === 'movie') {
+      if (props.category === 'movie') {
         matchesCategory = item.category.toLowerCase() === 'movie';
-      } else if (category === 'tv') {
+      } else if (props.category === 'tv') {
         matchesCategory = item.category.toLowerCase() === 'tv series';
       }
       
-      return matchesSearch && matchesBookmark && matchesCategory && !item.isTrending;
+      return matchesSearch && matchesCategory && !item.isTrending;
     })
 );

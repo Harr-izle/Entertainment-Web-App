@@ -4,15 +4,20 @@
   </div>
   <div class="div2">
     <app-search/>
-    <ng-container *ngIf="(category$ | async) === null">
-      <app-media-cards/>
-      <app-media-list [category]="null"/>
+    <ng-container *ngIf="!(isBookmarkView$ | async)">
+      <ng-container *ngIf="(category$ | async) === null">
+        <app-media-cards/>
+        <app-media-list [category]="null"/>
+      </ng-container>
+      <ng-container *ngIf="(category$ | async) === 'movie'">
+        <app-media-list [category]="'movie'"/>
+      </ng-container>
+      <ng-container *ngIf="(category$ | async) === 'tv'">
+        <app-media-list [category]="'tv'"/>
+      </ng-container>
     </ng-container>
-    <ng-container *ngIf="(category$ | async) === 'movie'">
-      <app-media-list [category]="'movie'"/>
-    </ng-container>
-    <ng-container *ngIf="(category$ | async) === 'tv'">
-      <app-media-list [category]="'tv'"/>
+    <ng-container *ngIf="isBookmarkView$ | async">
+      <app-media-list [isBookmarkView]="true"/>
     </ng-container>
   </div>
 </div>
